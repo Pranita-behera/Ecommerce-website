@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping Cart | SHOPLANE</title>
+    
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    
+    <!-- external styles -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    
+    <!-- custom styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="header"></header>
+    
+    <!-- Main Cart Container -->
+    <main class="cart-container">
+        <!-- Cart Items Section -->
+        <section class="cart-items">
+            <h1>Shopping Cart</h1>
+            <div id="cart-items-container">
+                <!-- Cart items will be loaded here dynamically -->
+            </div>
+        </section>
+        
+        <!-- Cart Summary Section -->
+        <section class="cart-summary">
+            <h2>Order Summary</h2>
+            
+            <!-- Summary Details -->
+            <div class="summary-item">
+                <p>Items (<span id="item-count">0</span>)</p>
+                <p>Rs. <span id="items-price">0</span></p>
+            </div>
+            
+            <div class="summary-item">
+                <p>Shipping</p>
+                <p>Free</p>
+            </div>
+            
+            <div class="summary-total">
+                <p>Total Amount</p>
+                <p>Rs. <span id="total-amount">0</span></p>
+            </div>
+            
+            <!-- Place Order Button -->
+            <button id="btn-place-order" class="disabled" disabled>Place Order</button>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer id="footer"></footer>
+    
+    <!-- Scripts -->
+    <script>
+        // Load header
+        fetch('../components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                
+                // Fix header links since we're in a subdirectory
+                document.querySelectorAll('#header a').forEach(link => {
+                    if (link.getAttribute('href') === 'index.html') {
+                        link.setAttribute('href', '../index.html');
+                    }
+                    if (link.getAttribute('href') === 'pages/cart.html') {
+                        link.setAttribute('href', 'cart.html');
+                    }
+                });
+                
+                // Update cart badge
+                if(document.cookie.indexOf(',counter=') >= 0) {
+                    let counter = document.cookie.split(',')[1].split('=')[1];
+                    document.getElementById("badge").innerHTML = counter;
+                }
+            });
+        
+        // Load footer
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+    <script src="../js/cart.js"></script>
+</body>
+</html>

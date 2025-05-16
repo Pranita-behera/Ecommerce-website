@@ -1,0 +1,33 @@
+<!-- Header Component -->
+<div id="container">
+    <!-- SHOP NAME -->
+    <div id="shopName"><a href="index.html"> <b>SHOP</b>LANE </a></div>
+    
+    <!-- COLLECTIONS ON WEBSITE -->
+    <div id="collection">
+        <div id="clothing"><a href="/#clothing"> CLOTHING </a></div>
+        <div id="accessories"><a href="/#accessories"> ACCESSORIES </a></div>
+    </div>
+    
+    <!-- SEARCH SECTION -->
+    <div id="search">
+        <i class="fas fa-search search"></i>
+        <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories">
+    </div>
+    
+    <!-- USER SECTION (CART AND USER ICON) -->
+    <div id="user">
+        <a href="pages/cart.html"> <i class="fas fa-shopping-cart addedToCart"><div id="badge"> 0 </div></i></a>
+        <a href="#"> <i class="fas fa-user-circle userIcon"></i> </a>
+    </div>
+</div>
+
+<script>
+    // Update cart badge from cookies if available
+    window.addEventListener('load', function() {
+        if(document.cookie.indexOf(',counter=') >= 0) {
+            let counter = document.cookie.split(',')[1].split('=')[1];
+            document.getElementById("badge").innerHTML = counter;
+        }
+    });
+</script>

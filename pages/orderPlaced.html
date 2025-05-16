@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Order Placed | SHOPLANE</title>
+    
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    
+    <!-- external styles -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    
+    <!-- custom styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/orderPlaced.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="header"></header>
+    
+    <!-- Order Confirmation Container -->
+    <main class="order-container">
+        <div class="order-confirmation">
+            <!-- Success Icon -->
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <!-- Order Success Message -->
+            <h1>Order Placed Successfully!</h1>
+            <p class="success-message">Your order has been placed and is being processed. You will receive an email confirmation shortly.</p>
+            
+            <!-- Order Details -->
+            <div class="order-details">
+                <h2>Order Details</h2>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Order ID:</span>
+                    <span id="order-id" class="detail-value"></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Order Date:</span>
+                    <span id="order-date" class="detail-value"></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Total Items:</span>
+                    <span id="total-items" class="detail-value"></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Total Amount:</span>
+                    <span class="detail-value">Rs <span id="total-amount"></span></span>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Delivery Address:</span>
+                    <span id="delivery-address" class="detail-value"></span>
+                </div>
+            </div>
+            
+            <!-- Order Items -->
+            <div class="order-items">
+                <h2>Items Ordered</h2>
+                <div id="order-items">
+                    <!-- Order items will be loaded here dynamically -->
+                </div>
+            </div>
+            
+            <!-- Continue Shopping Button -->
+            <button id="continue-shopping" class="btn-continue-shopping">Continue Shopping</button>
+        </div>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer id="footer"></footer>
+    
+    <!-- Scripts -->
+    <script>
+        // Load header
+        fetch('../components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                
+                // Fix header links since we're in a subdirectory
+                document.querySelectorAll('#header a').forEach(link => {
+                    if (link.getAttribute('href') === 'index.html') {
+                        link.setAttribute('href', '../index.html');
+                    }
+                    if (link.getAttribute('href') === 'pages/cart.html') {
+                        link.setAttribute('href', 'cart.html');
+                    }
+                });
+                
+                // Update cart badge
+                if(document.cookie.indexOf(',counter=') >= 0) {
+                    let counter = document.cookie.split(',')[1].split('=')[1];
+                    document.getElementById("badge").innerHTML = counter;
+                }
+            });
+        
+        // Load footer
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+    <script src="../js/orderPlaced.js"></script>
+</body>
+</html>
